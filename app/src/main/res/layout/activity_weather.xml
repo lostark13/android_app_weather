@@ -162,6 +162,22 @@
                 android:textSize="25sp"
                 android:textColor="#FFFFFF">
             </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Real Feel"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Visibility"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
         </LinearLayout>
 
         <LinearLayout
@@ -215,7 +231,24 @@
                 android:textColor="#FFFFFF"
                 android:text=": 6 KM/H">
             </TextView>
-
+            <TextView
+                android:id="@+id/tvrealWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:text=": 20 C">
+            </TextView>
+            <TextView
+                android:id="@+id/tvvisibiltyWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:text=": 1000 m">
+            </TextView>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

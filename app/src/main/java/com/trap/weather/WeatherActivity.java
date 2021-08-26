@@ -21,7 +21,7 @@ import retrofit2.Response;
 
 public class WeatherActivity extends AppCompatActivity {
 
-    private TextView cityWeather,temperatureWeather,conditionWeather,humidityWeather,maxTempertureWeather,minTemperatureWeather,pressureWeather,windWeather;
+    private TextView cityWeather,temperatureWeather,conditionWeather,humidityWeather,maxTempertureWeather,minTemperatureWeather,pressureWeather,windWeather,realWeather,visibilityWeather;
     private ImageView ivWeather;
     private EditText editCity;
     private Button b1;
@@ -37,6 +37,8 @@ public class WeatherActivity extends AppCompatActivity {
         minTemperatureWeather=findViewById(R.id.tvmintempWeather);
         pressureWeather=findViewById(R.id.tvpressureWeather);
         windWeather=findViewById(R.id.tvwindWeather);
+        realWeather=findViewById(R.id.tvrealWeather);
+        visibilityWeather=findViewById(R.id.tvvisibiltyWeather);
         ivWeather=findViewById(R.id.imageViewWeather);
         editCity=findViewById(R.id.editcityname);
         b1=findViewById(R.id.search);
@@ -65,6 +67,8 @@ public class WeatherActivity extends AppCompatActivity {
                     minTemperatureWeather.setText(":" + ((response.body().getMain().getTempMin() - 273.15) + "").substring(0, 4) + " °C");
                     pressureWeather.setText(":" + response.body().getMain().getPressure() + " hPa");
                     windWeather.setText(":" + response.body().getWind().getSpeed() + " m/s");
+                    realWeather.setText(((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
+                    visibilityWeather.setText(response.body().getVisibility() + " m");
                     String icode = response.body().getWeather().get(0).getIcon();
                     Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                             .placeholder(R.drawable.ic_launcher_background)

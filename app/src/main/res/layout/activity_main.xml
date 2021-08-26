@@ -58,6 +58,13 @@
                 android:text="Few Clouds"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
+            <TextView
+                android:id="@+id/textViewUV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="UV Index"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp" />
 
         </LinearLayout>
 

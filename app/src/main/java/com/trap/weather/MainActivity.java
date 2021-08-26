@@ -37,7 +37,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty;
+    private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty,uvIndex;
     private ImageView iv;
     private LinearLayout linearLayout;
     private FloatingActionButton b1;
@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         wind = findViewById(R.id.tvwind);
         realFeel = findViewById(R.id.tvreal);
         visibilty = findViewById(R.id.tvvisibilty);
+        uvIndex=findViewById(R.id.textViewUV);
         iv = findViewById(R.id.imageView);
         b1 = findViewById(R.id.fab);
         b1.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("lat :", String.valueOf(lat));
                 Log.e("lon :", String.valueOf(lon));
                 getWeatherData(lat, lon);
+                getUVData(lat,lon);
             }
         };
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -134,6 +136,21 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<OpenWeather> call, Throwable t) {
+                Log.e("Error ", String.valueOf(t));
+            }
+        });
+    }
+    public void getUVData(double lat, double lon) {
+        WeatherAPI weatherAPI = RetrofitWeather.getclient().create(WeatherAPI.class);
+        Call<OpenUV> call1 = weatherAPI.getUVWithLocation(lat, lon);
+        call1.enqueue(new Callback<OpenUV>() {
+            @Override
+            public void onResponse(Call<OpenUV> call, Response<OpenUV> response) {
+                uvIndex.setText("UVI: "+response.body().getValue()+"");
+                Log.e("UV",response.body().getValue()+"");
+            }
+            @Override
+            public void onFailure(Call<OpenUV> call, Throwable t) {
                 Log.e("Error ", String.valueOf(t));
             }
         });

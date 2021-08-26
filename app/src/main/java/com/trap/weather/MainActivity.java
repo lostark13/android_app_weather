@@ -16,9 +16,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -37,6 +39,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty;
     private ImageView iv;
+    private LinearLayout linearLayout;
     private FloatingActionButton b1;
     LocationManager locationManager;
     LocationListener locationListener;
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        linearLayout=findViewById(R.id.linear_layout);
+       // linearLayout.setBackgroundResource(R.drawable.haze);
         city = findViewById(R.id.tvCity);
         temperature = findViewById(R.id.textViewTemp);
         condition = findViewById(R.id.textViewCon);
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
+            locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER,10000,50,locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 50, locationListener);
         }
     }
@@ -108,6 +114,18 @@ public class MainActivity extends AppCompatActivity {
                 pressure.setText(":" + response.body().getMain().getPressure() + " hPa");
                 wind.setText(":" + response.body().getWind().getSpeed() + " m/s");
                 realFeel.setText(((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
+                if((condition.getText().toString()).contains("haze")){
+                    linearLayout.setBackgroundResource(R.drawable.haze);
+                }
+                else if((condition.getText().toString()).contains("clear")){
+                    linearLayout.setBackgroundResource(R.drawable.clear);
+                }
+                else if((condition.getText().toString()).contains("clouds")){
+                    linearLayout.setBackgroundResource(R.drawable.clouds);
+                }
+                else if((condition.getText().toString()).contains("mist")){
+                    linearLayout.setBackgroundResource(R.drawable.mist);
+                }
                 String icode = response.body().getWeather().get(0).getIcon();
                 Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                         .placeholder(R.drawable.ic_launcher_background)

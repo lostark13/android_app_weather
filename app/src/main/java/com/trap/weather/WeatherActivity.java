@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView cityWeather,temperatureWeather,conditionWeather,humidityWeather,maxTempertureWeather,minTemperatureWeather,pressureWeather,windWeather,realWeather,visibilityWeather;
     private ImageView ivWeather;
     private EditText editCity;
+    private LinearLayout linearLayoutWeather;
     private Button b1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,7 @@ public class WeatherActivity extends AppCompatActivity {
         visibilityWeather=findViewById(R.id.tvvisibiltyWeather);
         ivWeather=findViewById(R.id.imageViewWeather);
         editCity=findViewById(R.id.editcityname);
+        linearLayoutWeather=findViewById(R.id.linear_layout_main);
         b1=findViewById(R.id.search);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +72,18 @@ public class WeatherActivity extends AppCompatActivity {
                     windWeather.setText(":" + response.body().getWind().getSpeed() + " m/s");
                     realWeather.setText(((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
                     visibilityWeather.setText(response.body().getVisibility() + " m");
+                    if((conditionWeather.getText().toString()).contains("haze")){
+                        linearLayoutWeather.setBackgroundResource(R.drawable.haze);
+                    }
+                    else if((conditionWeather.getText().toString()).contains("clear")){
+                        linearLayoutWeather.setBackgroundResource(R.drawable.clear);
+                    }
+                    else if((conditionWeather.getText().toString()).contains("clouds")){
+                        linearLayoutWeather.setBackgroundResource(R.drawable.clouds);
+                    }
+                    else if((conditionWeather.getText().toString()).contains("mist")){
+                        linearLayoutWeather.setBackgroundResource(R.drawable.mist);
+                    }
                     String icode = response.body().getWeather().get(0).getIcon();
                     Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                             .placeholder(R.drawable.ic_launcher_background)

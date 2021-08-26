@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#03dbfc"
+    tools:context=".WeatherActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp">
+      <EditText
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="@drawable/background_file"
+          android:hint="Enter City"
+          android:textColor="#FFFFFF"
+          android:textColorHint="#FFFFFF"
+          android:gravity="center"
+          android:padding="15dp"
+          android:layout_weight="1"
+          android:drawableStart="@drawable/location_city"
+          android:layout_marginStart="25dp"
+          android:id="@+id/editcityname"
+          android:inputType="textPersonName">
+      </EditText>
+      <Button
+          android:layout_width="40dp"
+          android:layout_height="40dp"
+          android:id="@+id/search"
+          android:layout_marginStart="7dp"
+          android:background="@drawable/search">
+
+
+      </Button>
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linear_layout_weather"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvCityWeather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="London"
+        android:textSize="45sp"
+        android:textColor="#FFFFFF"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageViewWeather"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTempWeather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="30 C"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textViewConWeather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Few Clouds"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Humidity"
+                android:layout_marginTop="20dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max Temp"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min Temp"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pressure"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Wind"
+                android:layout_marginTop="15dp"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF">
+            </TextView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvhumdityWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="#FFFFFF"
+                android:text=": 30%">
+            </TextView>
+            <TextView
+                android:id="@+id/tvmaxtempWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:text=": 25 C">
+            </TextView>
+            <TextView
+                android:id="@+id/tvmintempWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:text=": 10 C">
+            </TextView>
+            <TextView
+                android:id="@+id/tvpressureWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:text=": 50">
+            </TextView>
+            <TextView
+                android:id="@+id/tvwindWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:layout_marginTop="15dp"
+                android:textColor="#FFFFFF"
+                android:text=": 6 KM/H">
+            </TextView>
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

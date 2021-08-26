@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:id="@+id/linear_layout"
+    android:background="#03dbfc"
+
+    >
+
+    <TextView
+        android:id="@+id/tvCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="20dp"
+        android:text="London"
+        android:textSize="45sp"
+        android:textColor="#FFFFFF"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="25dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewTemp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="30 C"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/textViewCon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Few Clouds"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="30dp"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Humidity"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Max Temp"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Min Temp"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pressure"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wind"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Real Feel"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visibility"
+            android:layout_marginTop="15dp"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF">
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+     <TextView
+         android:id="@+id/tvhumidity"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginTop="15dp"
+         android:textSize="25sp"
+         android:textColor="#FFFFFF"
+         android:text=": 30%">
+     </TextView>
+        <TextView
+            android:id="@+id/tvmaxtemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:text=": 25 C">
+        </TextView>
+        <TextView
+            android:id="@+id/tvmintemp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:text=": 10 C">
+        </TextView>
+        <TextView
+            android:id="@+id/tvpressure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:text=": 50">
+        </TextView>
+        <TextView
+            android:id="@+id/tvwind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:text=": 6 KM/H">
+        </TextView>
+        <TextView
+            android:id="@+id/tvreal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:text=": 20 C">
+        </TextView>
+        <TextView
+            android:id="@+id/tvvisibilty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#FFFFFF"
+            android:text=": 1000 m">
+        </TextView>
+</LinearLayout>
+    </LinearLayout>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/add" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

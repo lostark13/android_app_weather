@@ -48,8 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="30 C"
+                android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:textSize="35sp" />
 
             <TextView
                 android:id="@+id/textViewCon"
@@ -58,13 +59,6 @@
                 android:text="Few Clouds"
                 android:textColor="#FFFFFF"
                 android:textSize="30sp" />
-            <TextView
-                android:id="@+id/textViewUV"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="UV Index"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -80,155 +74,221 @@
         android:textColor="#FFFFFF"
         android:textSize="30sp" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-    <LinearLayout
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-         android:orientation="vertical">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Humidity"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Max Temp"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Min Temp"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Humidity"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pressure"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Max Temp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wind"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Real Feel"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Visibility"
-            android:layout_marginTop="15dp"
-            android:textSize="25sp"
-            android:textColor="#FFFFFF">
-        </TextView>
-    </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Min Temp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Pressure"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
 
-     <TextView
-         android:id="@+id/tvhumidity"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_marginTop="15dp"
-         android:textSize="25sp"
-         android:textColor="#FFFFFF"
-         android:text=": 30%">
-     </TextView>
-        <TextView
-            android:id="@+id/tvmaxtemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_marginTop="15dp"
-            android:textColor="#FFFFFF"
-            android:text=": 25 C">
-        </TextView>
-        <TextView
-            android:id="@+id/tvmintemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_marginTop="15dp"
-            android:textColor="#FFFFFF"
-            android:text=": 10 C">
-        </TextView>
-        <TextView
-            android:id="@+id/tvpressure"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_marginTop="15dp"
-            android:textColor="#FFFFFF"
-            android:text=": 50">
-        </TextView>
-        <TextView
-            android:id="@+id/tvwind"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_marginTop="15dp"
-            android:textColor="#FFFFFF"
-            android:text=": 6 KM/H">
-        </TextView>
-        <TextView
-            android:id="@+id/tvreal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_marginTop="15dp"
-            android:textColor="#FFFFFF"
-            android:text=": 20 C">
-        </TextView>
-        <TextView
-            android:id="@+id/tvvisibilty"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:layout_marginTop="15dp"
-            android:textColor="#FFFFFF"
-            android:text=": 1000 m">
-        </TextView>
-</LinearLayout>
-    </LinearLayout>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Wind"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Real Feel"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Visibility"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Cloudiness"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Sun Rise"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Sun Set"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="UV Index"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvhumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 30%"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvmaxtemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 25 C"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvmintemp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 10 C"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvpressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 50"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvwind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 6 KM/H"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvreal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 20 C"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvvisibilty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 1000 m"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvcloud"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 20%"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+                <TextView
+                    android:id="@+id/tvsunrise"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 06:05 AM"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+                <TextView
+                    android:id="@+id/tvsunset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 07:05 PM"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"></TextView>
+
+
+                <TextView
+                    android:id="@+id/textViewUV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text=": 10"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp" />
+            </LinearLayout>
+        </LinearLayout>
+        </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

@@ -31,13 +31,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty,uvIndex;
+    private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty,uvIndex,cloud,sunRise,sunSet;
     private ImageView iv;
     private LinearLayout linearLayout;
     private FloatingActionButton b1;
@@ -62,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
         realFeel = findViewById(R.id.tvreal);
         visibilty = findViewById(R.id.tvvisibilty);
         uvIndex=findViewById(R.id.textViewUV);
+        cloud=findViewById(R.id.tvcloud);
+        sunRise=findViewById(R.id.tvsunrise);
+        sunSet=findViewById(R.id.tvsunset);
         iv = findViewById(R.id.imageView);
         b1 = findViewById(R.id.fab);
         b1.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +122,18 @@ public class MainActivity extends AppCompatActivity {
                 pressure.setText(": " + response.body().getMain().getPressure() + " hPa");
                 wind.setText(": " + response.body().getWind().getSpeed() + " m/s");
                 realFeel.setText(": "+((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
+                cloud.setText(": "+response.body().getClouds().getAll()+" %");
+                long sunrise=response.body().getSys().getSunrise();
+                long sunset=response.body().getSys().getSunset();
+                long timezone=response.body().getTimezone();
+                Date date = new Date((sunrise+timezone)*1000L);
+                SimpleDateFormat jdf = new SimpleDateFormat("hh:mm:ss");
+                jdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+                sunRise.setText(": "+jdf.format(date)+" AM");
+                Date date1 = new Date((sunset+timezone)*1000L);
+                SimpleDateFormat jdf1 = new SimpleDateFormat("hh:mm:ss");
+                jdf1.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+                sunSet.setText(": "+jdf1.format(date1)+" PM");
                 if((condition.getText().toString()).contains("haze")){
                     linearLayout.setBackgroundResource(R.drawable.haze);
                 }
@@ -149,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         call1.enqueue(new Callback<OpenUV>() {
             @Override
             public void onResponse(Call<OpenUV> call, Response<OpenUV> response) {
-                uvIndex.setText("UVI: "+response.body().getValue()+"");
+                uvIndex.setText(": "+response.body().getValue()+"");
                 Log.e("UV",response.body().getValue()+"");
             }
             @Override

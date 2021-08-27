@@ -16,6 +16,10 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,6 +27,7 @@ import retrofit2.Response;
 public class WeatherActivity extends AppCompatActivity {
 
     private TextView cityWeather,temperatureWeather,conditionWeather,humidityWeather,maxTempertureWeather,minTemperatureWeather,pressureWeather,windWeather,realWeather,visibilityWeather;
+    private TextView cloudWeather,sunRiseWeather,sunSetWeather;
     private ImageView ivWeather;
     private EditText editCity;
     private LinearLayout linearLayoutWeather;
@@ -41,6 +46,9 @@ public class WeatherActivity extends AppCompatActivity {
         windWeather=findViewById(R.id.tvwindWeather);
         realWeather=findViewById(R.id.tvrealWeather);
         visibilityWeather=findViewById(R.id.tvvisibiltyWeather);
+        cloudWeather=findViewById(R.id.tvcloudWeather);
+        sunRiseWeather=findViewById(R.id.tvsunriseWeather);
+        sunSetWeather=findViewById(R.id.tvsunsetWeather);
         ivWeather=findViewById(R.id.imageViewWeather);
         editCity=findViewById(R.id.editcityname);
         linearLayoutWeather=findViewById(R.id.linear_layout_main);
@@ -72,6 +80,18 @@ public class WeatherActivity extends AppCompatActivity {
                     windWeather.setText(": " + response.body().getWind().getSpeed() + " m/s");
                     realWeather.setText(": "+((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
                     visibilityWeather.setText(": "+response.body().getVisibility() + " m");
+                    cloudWeather.setText(": "+response.body().getClouds().getAll()+" %");
+                    long sunrise=response.body().getSys().getSunrise();
+                    long sunset=response.body().getSys().getSunset();
+                    long timezone=response.body().getTimezone();
+                    Date date = new Date((sunrise+timezone)*1000L);
+                    SimpleDateFormat jdf = new SimpleDateFormat("hh:mm:ss");
+                    jdf.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+                    sunRiseWeather.setText(": "+jdf.format(date)+" AM");
+                    Date date1 = new Date((sunset+timezone)*1000L);
+                    SimpleDateFormat jdf1 = new SimpleDateFormat("hh:mm:ss");
+                    jdf1.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+                    sunSetWeather.setText(": "+jdf1.format(date1)+" PM");
                     if((conditionWeather.getText().toString()).contains("haze")){
                         linearLayoutWeather.setBackgroundResource(R.drawable.haze);
                     }

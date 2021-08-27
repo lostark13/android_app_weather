@@ -65,13 +65,13 @@ public class WeatherActivity extends AppCompatActivity {
                     cityWeather.setText(response.body().getName() + " , " + response.body().getSys().getCountry());
                     temperatureWeather.setText(((response.body().getMain().getTemp() - 273.15) + " ").substring(0, 4) + " °C");
                     conditionWeather.setText(response.body().getWeather().get(0).getDescription());
-                    humidityWeather.setText(":" + response.body().getMain().getHumidity() + " %");
-                    maxTempertureWeather.setText(":" + ((response.body().getMain().getTempMax() - 273.15) + "").substring(0, 4) + " °C");
-                    minTemperatureWeather.setText(":" + ((response.body().getMain().getTempMin() - 273.15) + "").substring(0, 4) + " °C");
-                    pressureWeather.setText(":" + response.body().getMain().getPressure() + " hPa");
-                    windWeather.setText(":" + response.body().getWind().getSpeed() + " m/s");
-                    realWeather.setText(((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
-                    visibilityWeather.setText(response.body().getVisibility() + " m");
+                    humidityWeather.setText(": " + response.body().getMain().getHumidity() + " %");
+                    maxTempertureWeather.setText(": " + ((response.body().getMain().getTempMax() - 273.15) + "").substring(0, 4) + " °C");
+                    minTemperatureWeather.setText(": " + ((response.body().getMain().getTempMin() - 273.15) + "").substring(0, 4) + " °C");
+                    pressureWeather.setText(": " + response.body().getMain().getPressure() + " hPa");
+                    windWeather.setText(": " + response.body().getWind().getSpeed() + " m/s");
+                    realWeather.setText(": "+((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
+                    visibilityWeather.setText(": "+response.body().getVisibility() + " m");
                     if((conditionWeather.getText().toString()).contains("haze")){
                         linearLayoutWeather.setBackgroundResource(R.drawable.haze);
                     }

@@ -108,14 +108,14 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<OpenWeather> call, Response<OpenWeather> response) {
                 city.setText(response.body().getName() + " , " + response.body().getSys().getCountry());
                 temperature.setText(((response.body().getMain().getTemp() - 273.15) + " ").substring(0, 4) + " °C");
-                visibilty.setText(response.body().getVisibility() + " m");
+                visibilty.setText(": "+response.body().getVisibility() + " m");
                 condition.setText(response.body().getWeather().get(0).getDescription());
-                humidity.setText(":" + response.body().getMain().getHumidity() + " %");
-                maxTemperture.setText(":" + ((response.body().getMain().getTempMax() - 273.15) + "").substring(0, 4) + " °C");
-                minTemperature.setText(":" + ((response.body().getMain().getTempMin() - 273.15) + "").substring(0, 4) + " °C");
-                pressure.setText(":" + response.body().getMain().getPressure() + " hPa");
-                wind.setText(":" + response.body().getWind().getSpeed() + " m/s");
-                realFeel.setText(((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
+                humidity.setText(": " + response.body().getMain().getHumidity() + " %");
+                maxTemperture.setText(": " + ((response.body().getMain().getTempMax() - 273.15) + "").substring(0, 4) + " °C");
+                minTemperature.setText(": " + ((response.body().getMain().getTempMin() - 273.15) + "").substring(0, 4) + " °C");
+                pressure.setText(": " + response.body().getMain().getPressure() + " hPa");
+                wind.setText(": " + response.body().getWind().getSpeed() + " m/s");
+                realFeel.setText(": "+((response.body().getMain().getFeelsLike() - 273.15) + " ").substring(0, 4) + " °C");
                 if((condition.getText().toString()).contains("haze")){
                     linearLayout.setBackgroundResource(R.drawable.haze);
                 }

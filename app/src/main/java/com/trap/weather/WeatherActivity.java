@@ -84,6 +84,9 @@ public class WeatherActivity extends AppCompatActivity {
                     else if((conditionWeather.getText().toString()).contains("mist")){
                         linearLayoutWeather.setBackgroundResource(R.drawable.mist);
                     }
+                    else if((conditionWeather.getText().toString()).contains("rain")){
+                        linearLayoutWeather.setBackgroundResource(R.drawable.rain);
+                    }
                     String icode = response.body().getWeather().get(0).getIcon();
                     Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                             .placeholder(R.drawable.ic_launcher_background)

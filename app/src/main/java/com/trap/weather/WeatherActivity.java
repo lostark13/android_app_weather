@@ -3,6 +3,7 @@ package com.trap.weather;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,10 +33,13 @@ public class WeatherActivity extends AppCompatActivity {
     private EditText editCity;
     private LinearLayout linearLayoutWeather;
     private Button b1;
+    private String city="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
+        Intent i =getIntent();
+        city=i.getStringExtra("city");
         cityWeather=findViewById(R.id.tvCityWeather);
         temperatureWeather=findViewById(R.id.textViewTempWeather);
         conditionWeather=findViewById(R.id.textViewConWeather);
@@ -53,6 +57,9 @@ public class WeatherActivity extends AppCompatActivity {
         editCity=findViewById(R.id.editcityname);
         linearLayoutWeather=findViewById(R.id.linear_layout_main);
         b1=findViewById(R.id.search);
+        if(city.length()!=0){
+            getWeatherData(city);
+        }
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton b1;
     LocationManager locationManager;
     LocationListener locationListener;
+    private String cityName="";
     double lon, lat;
 
     @Override
@@ -74,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, WeatherActivity.class);
+                i.putExtra("city",cityName);
                 startActivity(i);
             }
         });
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 SimpleDateFormat jdf1 = new SimpleDateFormat("hh:mm:ss");
                 jdf1.setTimeZone(TimeZone.getTimeZone("GMT+0"));
                 sunSet.setText(": "+jdf1.format(date1)+" PM");
+                cityName=response.body().getName();
                 if((condition.getText().toString()).contains("haze")){
                     linearLayout.setBackgroundResource(R.drawable.haze);
                 }

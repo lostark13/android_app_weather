@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     LocationManager locationManager;
     LocationListener locationListener;
     private String icode = "", cityName = "";
-    double lon, lat;
+    double lon, lat,wlon,wlat;
     String filename = "weather.txt";
     BroadcastReceiver br;
 
@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         linearLayout = findViewById(R.id.linear_layout);
-        checkInternetConnection();
         city = findViewById(R.id.tvCity);
         temperature = findViewById(R.id.textViewTemp);
         condition = findViewById(R.id.textViewCon);
@@ -89,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(lat==0 && lon==0){
+                  lat=wlat;
+                  lon=wlon;
+                }
                 getWeatherData(lat, lon);
                 getUVData(lat, lon);
             }
@@ -102,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        getData();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
             @Override
@@ -121,6 +123,8 @@ public class MainActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 10000, 50, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 50, locationListener);
         }
+        getData();
+        checkInternetConnection();
     }
 
     @Override
@@ -161,6 +165,8 @@ public class MainActivity extends AppCompatActivity {
                 jdf1.setTimeZone(TimeZone.getTimeZone("GMT+0"));
                 sunSet.setText(": " + jdf1.format(date1) + " PM");
                 cityName = response.body().getName();
+                wlat=response.body().getCoord().getLat();
+                wlon=response.body().getCoord().getLon();
                 if ((condition.getText().toString()).contains("haze")) {
                     linearLayout.setBackgroundResource(R.drawable.haze);
                 } else if ((condition.getText().toString()).contains("clear")) {
@@ -207,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveData() {
         FileOutputStream fos;
-        String data = city.getText() + "#" + temperature.getText() + "#" + condition.getText() + "#" + humidity.getText() + "#" + maxTemperture.getText() + "#" + minTemperature.getText() + "#" + pressure.getText() + "#" + wind.getText() + "#" + realFeel.getText() + "#" + visibilty.getText() + "#" + uvIndex.getText() + "#" + cloud.getText() + "#" + sunRise.getText() + "#" + sunSet.getText() + "#" + icode + "#" +updateDate.getText()+"#";
+        String data = city.getText() + "#" + temperature.getText() + "#" + condition.getText() + "#" + humidity.getText() + "#" + maxTemperture.getText() + "#" + minTemperature.getText() + "#" + pressure.getText() + "#" + wind.getText() + "#" + realFeel.getText() + "#" + visibilty.getText() + "#" + uvIndex.getText() + "#" + cloud.getText() + "#" + sunRise.getText() + "#" + sunSet.getText() + "#" + icode + "#" +updateDate.getText()+"#" +wlat+"#"+wlon+"#";
         try {
             fos = openFileOutput(filename, Context.MODE_PRIVATE);
             fos.write(data.getBytes());
@@ -245,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
             sunSet.setText(arr[13]);
             String icode = arr[14];
             updateDate.setText(arr[15]);
+            wlat=Double.parseDouble(arr[16]);
+            wlon=Double.parseDouble(arr[17]);
             Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(iv);
@@ -277,10 +285,10 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("TEST Internet", info.toString() + " "
                             + state.toString());
                     if (state == NetworkInfo.State.CONNECTED) {
-                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                             locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 10000, 50, locationListener);
                             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 50, locationListener);
-
+                        }
                     } else {
                         Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                     }

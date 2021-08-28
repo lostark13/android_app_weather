@@ -7,13 +7,19 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.admin.NetworkEvent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
@@ -49,15 +55,17 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton b1;
     LocationManager locationManager;
     LocationListener locationListener;
-    private String icode="",cityName = "";
+    private String icode = "", cityName = "";
     double lon, lat;
-    String filename="weather.txt";
+    String filename = "weather.txt";
+    BroadcastReceiver br;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         linearLayout = findViewById(R.id.linear_layout);
-        // linearLayout.setBackgroundResource(R.drawable.haze);
+        checkInternetConnection();
         city = findViewById(R.id.tvCity);
         temperature = findViewById(R.id.textViewTemp);
         condition = findViewById(R.id.textViewCon);
@@ -175,23 +183,29 @@ public class MainActivity extends AppCompatActivity {
                 uvIndex.setText(": " + response.body().getValue() + "");
                 Log.e("UV", response.body().getValue() + "");
             }
+
             @Override
             public void onFailure(Call<OpenUV> call, Throwable t) {
                 Log.e("Error ", String.valueOf(t));
             }
         });
     }
-    public void saveData(){
+
+    public void saveData() {
         FileOutputStream fos;
-        String data=city.getText()+"#"+ temperature.getText()+"#"+ condition.getText()+"#" +humidity.getText()+ "#"+ maxTemperture.getText()+"#"+ minTemperature.getText()+"#"+ pressure.getText()+"#"+ wind.getText()+"#"+ realFeel.getText()+"#"+ visibilty.getText()+"#"+ uvIndex.getText()+"#"+ cloud.getText()+"#"+ sunRise.getText()+"#"+ sunSet.getText()+"#"+icode+"#";
+        String data = city.getText() + "#" + temperature.getText() + "#" + condition.getText() + "#" + humidity.getText() + "#" + maxTemperture.getText() + "#" + minTemperature.getText() + "#" + pressure.getText() + "#" + wind.getText() + "#" + realFeel.getText() + "#" + visibilty.getText() + "#" + uvIndex.getText() + "#" + cloud.getText() + "#" + sunRise.getText() + "#" + sunSet.getText() + "#" + icode + "#";
         try {
             fos = openFileOutput(filename, Context.MODE_PRIVATE);
             fos.write(data.getBytes());
             fos.close();
-        } catch (FileNotFoundException e) {e.printStackTrace();}
-        catch (IOException e) {e.printStackTrace();}
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-    public void getData(){
+
+    public void getData() {
         StringBuffer stringBuffer = new StringBuffer();
         try {
             BufferedReader inputReader = new BufferedReader(new InputStreamReader(
@@ -200,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
             while ((inputString = inputReader.readLine()) != null) {
                 stringBuffer.append(inputString);
             }
-            String arr[]=stringBuffer.toString().split("#");
+            String arr[] = stringBuffer.toString().split("#");
             city.setText(arr[0]);
             temperature.setText(arr[1]);
             condition.setText(arr[2]);
@@ -215,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             cloud.setText(arr[11]);
             sunRise.setText(arr[12]);
             sunSet.setText(arr[13]);
-            String icode=arr[14];
+            String icode = arr[14];
             Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(iv);
@@ -230,9 +244,42 @@ public class MainActivity extends AppCompatActivity {
             } else if ((condition.getText().toString()).contains("rain")) {
                 linearLayout.setBackgroundResource(R.drawable.rain);
             }
-            Log.e("GETDATA",stringBuffer.toString());
+            Log.e("GETDATA", stringBuffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void checkInternetConnection() {
+        if (br == null) {
+            br = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    Bundle extras = intent.getExtras();
+                    NetworkInfo info = (NetworkInfo) extras
+                            .getParcelable("networkInfo");
+                    NetworkInfo.State state = info.getState();
+                    Log.d("TEST Internet", info.toString() + " "
+                            + state.toString());
+                    if (state == NetworkInfo.State.CONNECTED) {
+                        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
+                            locationManager.requestLocationUpdates(LocationManager.FUSED_PROVIDER, 10000, 50, locationListener);
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 50, locationListener);
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    }
+                }
+            };
+            final IntentFilter intentFilter = new IntentFilter();
+            intentFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+            registerReceiver((BroadcastReceiver) br, intentFilter);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(br);
+        super.onDestroy();
     }
 }

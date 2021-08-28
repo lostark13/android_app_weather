@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import retrofit2.Call;
@@ -49,8 +51,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty, uvIndex, cloud, sunRise, sunSet;
+    private TextView city, temperature, condition, humidity, maxTemperture, minTemperature, pressure, wind, realFeel, visibilty, uvIndex, cloud, sunRise, sunSet,updateDate;
     private ImageView iv;
+    private Button button;
     private LinearLayout linearLayout;
     private FloatingActionButton b1;
     LocationManager locationManager;
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         city = findViewById(R.id.tvCity);
         temperature = findViewById(R.id.textViewTemp);
         condition = findViewById(R.id.textViewCon);
+        updateDate=findViewById(R.id.tvlastUpdate);
         humidity = findViewById(R.id.tvhumidity);
         maxTemperture = findViewById(R.id.tvmaxtemp);
         minTemperature = findViewById(R.id.tvmintemp);
@@ -81,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
         sunRise = findViewById(R.id.tvsunrise);
         sunSet = findViewById(R.id.tvsunset);
         iv = findViewById(R.id.imageView);
+        button=findViewById(R.id.buttonUpdate);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getWeatherData(lat, lon);
+                getUVData(lat, lon);
+            }
+        });
         b1 = findViewById(R.id.fab);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -160,6 +172,8 @@ public class MainActivity extends AppCompatActivity {
                 } else if ((condition.getText().toString()).contains("rain")) {
                     linearLayout.setBackgroundResource(R.drawable.rain);
                 }
+                String localdate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss ", Locale.getDefault()).format(new Date());
+                updateDate.setText(localdate);
                 icode = response.body().getWeather().get(0).getIcon();
                 Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                         .placeholder(R.drawable.ic_launcher_background)
@@ -193,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void saveData() {
         FileOutputStream fos;
-        String data = city.getText() + "#" + temperature.getText() + "#" + condition.getText() + "#" + humidity.getText() + "#" + maxTemperture.getText() + "#" + minTemperature.getText() + "#" + pressure.getText() + "#" + wind.getText() + "#" + realFeel.getText() + "#" + visibilty.getText() + "#" + uvIndex.getText() + "#" + cloud.getText() + "#" + sunRise.getText() + "#" + sunSet.getText() + "#" + icode + "#";
+        String data = city.getText() + "#" + temperature.getText() + "#" + condition.getText() + "#" + humidity.getText() + "#" + maxTemperture.getText() + "#" + minTemperature.getText() + "#" + pressure.getText() + "#" + wind.getText() + "#" + realFeel.getText() + "#" + visibilty.getText() + "#" + uvIndex.getText() + "#" + cloud.getText() + "#" + sunRise.getText() + "#" + sunSet.getText() + "#" + icode + "#" +updateDate.getText()+"#";
         try {
             fos = openFileOutput(filename, Context.MODE_PRIVATE);
             fos.write(data.getBytes());
@@ -230,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
             sunRise.setText(arr[12]);
             sunSet.setText(arr[13]);
             String icode = arr[14];
+            updateDate.setText(arr[15]);
             Picasso.get().load("https://openweathermap.org/img/wn/" + icode + "@2x.png")
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(iv);
